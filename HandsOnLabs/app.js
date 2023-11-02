@@ -1,95 +1,31 @@
-class TicketManager {
-	#precioBaseGanancia = 0.15;
+class ProductManager {
 
 	constructor() {
-		this.eventos = [];
+		this.products=[];
 	}
 
-	getEventos() {
-		return this.eventos;
+    static id = 0;
+
+	addProduct(title, description, price, thumbnail, code, stock) {
+		ProductManager.id++
+		this.products.push({ title, description, price, thumbnail, code, stock, id:ProductManager.id });
 	}
 
-	agregarEvento(evento) {
-		evento.precio += evento.precio * this.#precioBaseGanancia;
-
-		if (this.eventos.length === 0) {
-			evento.id = 1;
-		} else {
-			// Autoincremental
-			evento.id = this.eventos[this.eventos.length - 1].id + 1;
-		}
-
-		this.eventos.push(evento);
+	getProduct(){
+		return this.products;
 	}
 
-	agregarUsuario(idEvento, idUsuario) {
-		const evento = this.eventos.find((evento) => evento.id === idEvento);
-
-		if (!evento) {
-			return "No existe el evento";
-		}
-
-		if (!evento.participantes.includes(idUsuario)) {
-			evento.participantes.push(idUsuario);
-		} else {
-			return "El usuario ya existe";
+	getProductById(id){
+		if(!this.products.find((producto) => producto.id === id)){
+			console.log("Not found!")
 		}
 	}
 
-	ponerEventoEnGira(idEvento, nuevaLocalidad, nuevaFecha) {
-		const evento = this.eventos.find((evento) => evento.id === idEvento);
-
-		if (!evento) {
-			return "El evento no existe";
-		}
-
-		const newEvento = {
-			...evento,
-			lugar: nuevaLocalidad,
-			fecha: nuevaFecha,
-			id: this.eventos[this.eventos.length - 1].id + 1,
-			participantes: [],
-		};
-
-		this.eventos.push(newEvento);
-	}
 }
 
-class Evento {
-	constructor(
-		nombre,
-		lugar,
-		precio,
-		capacidad = 50,
-		fecha = new Date().toLocaleDateString()
-	) {
-		this.nombre = nombre;
-		this.lugar = lugar;
-		this.precio = precio;
-		this.capacidad = capacidad;
-		this.fecha = fecha;
-		this.participantes = [];
-	}
-}
+const productos =  new ProductManager;
 
-//Pruebas
-const manejadorEventos = new TicketManager();
+productos.addProduct("Coca-Cola", "Es una gaseosa azucarada y vendida a nivel mundial", 950, "https://coca-colafemsa.com/wp-content/uploads/2020/02/1-40.png", 45454, 10)
+productos.addProduct("Cotonetes", "es un instrumento utilizado para recoger muestras, para su posterior estudio, normalmente en medicina se usa para saber que germen afecta a una infección, también se usa en cosméticos y aunque también se suele usar en la limpieza de la oreja", 400, "https://tekielar.vtexassets.com/arquivos/ids/168479/6030941.jpg?v=637975102718330000", 23435, 9)
 
-console.log(
-	"agregando Evento coder 1 para Argentina, precio: 200, para 50 participantes"
-);
-manejadorEventos.agregarEvento(
-	new Evento("Evento coder 1", "Argentina", 200, 50)
-);
-
-console.log(
-	"agregando al evento con id 1 la participacion del usuario con id 2"
-);
-manejadorEventos.agregarUsuario(1, 2);
-
-console.log(
-	"creando una copia vacía del evento 1 pero en mexico y para el 2024"
-);
-manejadorEventos.ponerEventoEnGira(1, "Mexico", "30/11/2024");
-
-console.log(manejadorEventos.getEventos());
+console.log(productos.getProduct())
