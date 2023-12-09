@@ -35,20 +35,7 @@ class ProductManager {
 		await this.saveFile();
 	}
 
-	/*async addProduct(product) {
-	if (!this.isValidProduct(product)) {
-		console.log("Error: Todos los campos del producto son obligatorios.");
-	} else {
-		if (this.products.some((p) => p.code === product.code)) {
-			console.log(`Error: El producto con el código ${product.code} ya existe.`);
-		} else {
-			ProductManager.id++;
-			product.id = ProductManager.id;
-			this.products.push(product);
-			await this.saveFile();
-		}
-	}
-}*/
+
 
 	getProducts() {
 		return [...this.products];
@@ -59,7 +46,7 @@ class ProductManager {
 		if (product) {
 			return product;
 		} else {
-			console.log("Not Found!");
+			return{error:"Producto no encontrado"};
 		}
 	}
 
@@ -72,7 +59,7 @@ class ProductManager {
 				"utf-8"
 			);
 		} catch (error) {
-			console.log(`ERROR ${error}`);
+			console.log(`Surgio un error en: ${error}`);
 		}
 	}
 

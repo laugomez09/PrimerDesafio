@@ -1,6 +1,9 @@
 import express from "express";
-import ProductManager from "../Desafios/ProductManager.js"
-import { routerCart } from "./routerCart.js";
+import ProductManager from "../../Desafios/ProductManager.js"
+import { routerCart } from "../routers/routerCart.js";
+import { engine } from "express-handlebars";
+import * as path from "path"
+import __dirname from "../utils.js";
 
 const app = express()
 app.use(express.urlencoded({ extended: true }))
@@ -36,20 +39,20 @@ app.get("/products/:id", (req, res) => {
 
 app.use("/products/cart", routerCart)
 
-/*app.get("/products", (req, res) => {
-    let limit = parseInt(req.query.limit);
-    if (!limit) return res.send(getProducts)
-    let allProducts = getProducts;
-    let productLimit = allProducts.slice(0, limit)
-    res.send(productLimit)
-})
+//Handlebars
+app.engine("handlebars", engine())
+app.set("view engine", "handlebars")
+app.set("views", path.resolve(__dirname + "/views"))
 
-app.get("/products/:id", (req, res) => {
-    let id = parseInt(req.params.id)
-    let allProducts = getProducts;
-    let productById = allProducts.find(product => product.id === id)
-    res.send(productById)
-})*/
+app.use("/", express.static(__dirname + "/public"))
+
+app.get("/", async (req, res) => {
+    const allProducts = productos.getProducts();
+    res.render("home",{
+        title: "Express Avanzado | Handlebars",
+        products : allProducts
+    })
+})
 
 const PORT = 8080
 const server = app.listen(PORT, () => {
