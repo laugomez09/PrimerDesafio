@@ -1,14 +1,14 @@
-import express from 'express';
-import handlebars from 'express-handlebars';
-import __dirname from './dirname.js'
-import { Server } from 'socket.io'
-import mongoose from 'mongoose';
+import express from "express";
+import handlebars from "express-handlebars";
+import __dirname from "./dirname.js"
+import { Server } from "socket.io"
+import mongoose from "mongoose";
 import Handlebars from "handlebars";
 import { allowInsecurePrototypeAccess } from "@handlebars/allow-prototype-access";
-import productsRoute from './Routes/productsRoute.js';
-import cartRoute from './Routes/cartRoute.js';
-import viewRouter from './Routes/viewRouter.js'
-import MessagesDao from './daos/dbManager/messages.dao.js'
+import productsRoute from "./Routes/productsRoute.js";
+import cartRoute from "./Routes/cartRoute.js";
+import viewRouter from "./Routes/viewRoute.js";
+import MessagesDao from "./daos/DBmanager/messages.dao.js";
 
 const app = express();
 const PORT = 8080;
