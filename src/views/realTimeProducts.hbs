@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Time Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+    <div>
+        <form method="post" id="realTimeForm">
+            <label for="realTimeTitle">Title:</label>
+            <input type="text" id="realTimeTitle" name="title" required><br>
+
+            <label for="realTimeDescription">Description:</label>
+            <textarea id="realTimeDescription" name="description" required></textarea><br>
+
+            <label for="realTimePrice">Price:</label>
+            <input type="number" id="realTimePrice" name="price" step="0.01" required><br>
+
+            <label for="realTimeCategory">Category:</label>
+            <input type="text" id="realTimeCategory" name="category" required><br>
+
+            <label for="realTimeThumbnail">Thumbnail URL:</label>
+            <input type="text" id="realTimeThumbnail" name="thumbnail" required><br>
+
+            <label for="realTimeStock">Stock:</label>
+            <input type="number" id="realTimeStock" name="stock" required><br>
+
+            <label for="realTimeCode">Code:</label>
+            <input type="text" id="realTimeCode" name="code" required><br>
+
+            <input type="submit" value="Send" id="realTimeButtonn">
+        </form>
+
+<div class="realTimeProductsContainer">
+    <h1>Lista de Productos en Tiempo Real</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Precio</th>
+                <th>Código</th>
+                <th>ID</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="realTimeProductTableBody">
+            {{#each products}}
+                <tr>
+                    <td>{{this.title}}</td>
+                    <td>{{this.price}}</td>
+                    <td>{{this.code}}</td>
+                    <td>{{this.id}}</td>
+                    <td>
+                        <button class="deleteProduct" onclick="deleteProduct('{{this.id}}')">Eliminar</button>
+                        <button class="updateProduct" onclick="updateProduct('{{this.id}}')">Actualizar</button>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/RealTimeProductsContainer.js"></script>
+</body>
+</html>

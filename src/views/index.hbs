@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="welcome-container">
+        <div class="welcome-content">
+            <h1 class="glow-text">
+                ¡Bienvenido!
+            </h1>
+
+            <div class="button-container">
+                <a href="http://localhost:8080/api/listProducts" class="welcome-button glow-text">Listado de
+                    productos</a>
+                <a href="http://localhost:8080/api/carts/658ccaa426b638d9f9032dde"
+                    class="welcome-button glow-text">Carrito</a>
+                <a href="http://localhost:8080/api/realtimeproducts" class="welcome-button glow-text">agregar
+                    productos</a>
+                <a href="http://localhost:8080/api/chat" class="welcome-button glow-text">CHAT</a>
+            </div>
+        </div>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/main.js"></script>
+    </div>
+</body>
+
+</html>

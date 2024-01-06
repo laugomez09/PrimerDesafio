@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Listado de Productos</h1>
+
+        <div class="sort-buttons">
+            <a href="/api/listProducts?page={{page}}&sort=asc" class="sort-button">Ascender</a>
+            <a href="/api/listProducts?page={{page}}&sort=desc" class="sort-button">Descender</a>
+        </div>
+
+        <ul class="ProductsContainer">
+            {{#each products}}
+            <li class="styleList">
+                <strong>{{this.title}}</strong>
+                <img src="{{this.thumbnail}}" alt="imagen del producto">
+                <p>{{this.description}}</p>
+                <div class="details">
+                    <p class="detailTitle"><b>Precio:</b></p>
+                    <p class="detailContent">{{this.price}}</p>
+                </div>
+                <div class="details">
+                    <p class="detailTitle"><b>Categoría:</b></p>
+                    <p class="detailContent">{{this.category}}</p>
+                </div>
+                <div class="details">
+                    <p class="detailTitle"><b>Stock:</b></p>
+                    <p class="detailContent">{{this.stock}}</p>
+                </div>
+
+                <a href="/api/listProducts/details/{{this._id}}">Ver detalles</a>
+
+                <input type="submit" value="Agregar al carrito" id="">
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="pagination-buttons">
+        {{#if hasPrevPage}}
+        <a href="/api/listProducts?page={{add page -1}}&sort={{sort}}" class="pagination-button">Anterior</a>
+        {{/if}}
+        {{#if hasNextPage}}
+        <a href="/api/listProducts?page={{add page 1}}&sort={{sort}}" class="pagination-button">Siguiente</a>
+        {{/if}}
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

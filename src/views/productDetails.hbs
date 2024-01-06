@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Producto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Detalles del Producto</h1>
+        <div class="productDetailsContainer">
+            <h2>{{product.title}}</h2>
+            <img src="{{product.thumbnail}}" alt="imagen del producto">
+            <p>{{product.description}}</p>
+            <div class="details">
+                <p class="detailTitle"><b>Precio:</b></p>
+                <p class="detailContent">{{product.price}}</p>
+            </div>
+            <div class="details">
+                <p class="detailTitle"><b>Categoría:</b></p>
+                <p class="detailContent">{{product.category}}</p>
+            </div>
+            <div class="details">
+                <p class="detailTitle"><b>Stock:</b></p>
+                <p class="detailContent">{{product.stock}}</p>
+            </div>
+            <input type="submit" value="Agregar al carrito" id="">
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

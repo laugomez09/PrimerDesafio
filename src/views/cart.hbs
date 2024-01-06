@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{{fileCss}}">
+</head>
+
+<body>
+    <div class="cart-container">
+        <h1>Tu Carrito de Compras</h1>
+        <ul class="cart-products-container">
+            {{#each cartProducts}}
+            {{#each this.products}}
+            <li class="cart-item">
+                <strong class="product-title">{{this.product.title}}</strong>
+                <img class="product-thumbnail" src="{{this.product.thumbnail}}" alt="imagen del producto">
+                <div class="details">
+                    <p class="detail-title"><b>Precio:</b></p>
+                    <p class="detail-content">{{this.product.price}} USD</p>
+                </div>
+                <div class="details">
+                    <p class="detail-title"><b>Cantidad:</b></p>
+                    <p class="detail-content">{{this.quantity}}</p>
+                </div>
+            </li>
+            {{/each}}
+            {{/each}}
+        </ul>
+    </div>
+</body>
+
+</html>
