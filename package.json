@@ -5,19 +5,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/servidor.js"
+    "start:local": "node --watch server-with-local.js",
+    "start:mysql": "node --watch server-with-mysql.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Amadeo I",
   "license": "ISC",
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.5",
+    "connect-mongo": "^5.1.0",
     "express": "^4.18.2",
     "express-handlebars": "^7.1.2",
     "handlebars": "^4.7.8",
     "mongoose": "^8.0.3",
     "nodemon": "^3.0.1",
+    "session-file-store": "^1.5.0",
     "socket.io": "^4.7.3",
     "sweetalert2": "^11.10.2",
     "uuid": "^9.0.1"

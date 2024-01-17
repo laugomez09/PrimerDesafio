@@ -1,8 +1,11 @@
 import { Router } from "express";
-import productsDao from "../daos/dbManager/products.dao.js";
 import { io } from "../servidor.js";
+import productsDao from "../daos/dbManager/products.dao.js";
 import cartDao from "../daos/dbManager/cart.dao.js";
 import Handlebars from "handlebars";
+import cookieParser from "cookie-parser";
+import session from "express-session";
+
 
 Handlebars.registerHelper('add', (a, b) => {
     return a + b;
@@ -168,5 +171,128 @@ router.get("/carts/:cartId", async (req, res) => {
         res.status(500).send("Error interno del servidor");
     }
 });
+
+// cookie sin firma
+/* router.use(cookieParser()); */
+
+//cookie con firma
+router.use(cookieParser('palabraClave'));
+
+router.get("/setCookie", async (req, res) => {
+    try {
+        // sin firma
+        /*  res.cookie('myCookie' ,'Esta es un cookie sin firma', {
+           //tiempo de vida
+           maxAge: 30000
+         }).send('cookie asignada con exito')
+     
+       } catch (error) {
+        console.log("ocurrio un error en la pagina de cookies", error);
+       } */
+
+        //con firma
+        res.cookie('myCookie', 'Esta es un cookie sin firma', {
+            //tiempo de vida
+            maxAge: 30000,
+            signed: true
+        }).send('cookie asignada con exito')
+
+    } catch (error) {
+        console.log("ocurrio un error en la pagina de cookies", error);
+    }
+})
+
+
+router.get("/getCookie", async (req, res) => {
+    try {
+        //sin firma
+        /* res.send(req.cookies); */
+
+        //con firma
+        res.send(req.signedCookies)
+
+    } catch (error) {
+        console.log("ocurrio un error en la pagina de cookies", error);
+    }
+})
+
+
+router.get("/deleteCookie", async (req, res) => {
+    try {
+        //sin firma
+        res.clearCookie('MyCookie').send('cookie boorada con exito')
+
+    } catch (error) {
+        console.log("ocurrio un error en la pagina de cookies", error);
+    }
+})
+
+// CONFIGUERACION DE SESSION
+router.use(session(
+    {
+        secret: "codigoSecreto190",
+        resave: true,
+        saveUninitialized: true
+    }
+))
+
+router.get('/session', (req, res) => {
+    if (req.session.counter) {
+        req.session.counter++
+        res.send(`Bienvenido devuelta a este sitio ${req.session.counter}`)
+    } else {
+        req.session.counter = 1
+        res.send('Bienvenido!!');
+    }
+})
+
+router.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (!err) {
+            res.send('Logout ok!')
+        } else {
+            res.send({ error: 'Error logout', msg: 'Error al cerrar la session' })
+        }
+    })
+})
+
+router.get('/login', (req, res) => {
+
+    const { username, password } = req.query;
+
+    if (!username || !password) {
+        return res.status(401).send('Usuario y contraseña son obligatorios.');
+    }
+
+    if (password.length < 8) {
+        return res.status(401).send('La contraseña debe tener al menos 8 caracteres.');
+    }
+
+    if (!/[A-Z]/.test(password) || !/\d/.test(password)) {
+        return res.status(401).send('La contraseña debe contener al menos una letra mayúscula y un número.');
+    }
+
+    if (username !== 'pepito123' || password !== 'Namepass4323') {
+        res.status(401).send('Login failed, check your username and password')
+    } else {
+        req.session.user = username;
+        req.session.admin = true;
+        res.send('Login Successsful!!')
+    }
+
+    res.status(200).send('Inicio de sesión exitoso.');
+})
+
+function auth(req, res, next) {
+    if (req.session.user === 'pepito123' && req.session.admin) {
+        return next()
+    } else {
+        return res.status(403).send("Usuario no autorizado para ingresar a este recurso")
+    }
+}
+
+router.get('/private', auth, (req, res) => {
+    res.send('Si estas viendo esto es porque eres admin')
+})
 
 export default router;

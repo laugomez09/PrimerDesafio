@@ -147,3 +147,58 @@ button.updateProduct {
     background-color: #1565c0;
     color: #fff;
 }
+
+.pagination-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination-button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    color: #3498db;
+    background-color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-button:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.sort-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.sort-button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #27ae60;
+    border-radius: 5px;
+    color: #27ae60;
+    background-color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sort-button.active {
+    background-color: #27ae60;
+    /* Color de fondo cuando el botón está activo */
+    color: white;
+    /* Color del texto cuando el botón está activo */
+}
+
+.sort-button:hover {
+    background-color: #27ae60;
+    color: white;
+}
