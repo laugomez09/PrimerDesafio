@@ -67,7 +67,7 @@ router.get("/listProducts/details/:id", async (req, res) => {
         console.log(error);
         res.status(500).json({
             status: "error",
-            error: "Error interno del servidor",
+            error: "Error",
         });
     }
 });

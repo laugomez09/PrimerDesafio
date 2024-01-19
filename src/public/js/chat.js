@@ -6,10 +6,10 @@ let user;
 
 Swal.fire({
     title: "Bienvenido",
-    text: "Ingrese su nombre para continuar",
+    text: "Por favor ingrese su nombre para continuar",
     input: "text",
     inputValidator: (value) => {
-        return !value && "Necesitás identificarte";
+        return !value && "Necesitás identificarte para continuar";
     },
     allowOutsideClick: false,
 }).then((value) => {
@@ -28,7 +28,7 @@ chatbox.addEventListener("keyup", (e) => {
 socket.on("connected", (data) => {
     if (user !== undefined) {
         Swal.fire({
-            text: `Nuevo usuario conectado: ${data}`,
+            text: `El usuario nuevo se ha conectado: ${data}`,
             toast: true,
             position: "top-right",
         });

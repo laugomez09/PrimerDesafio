@@ -184,21 +184,21 @@ button.updateProduct {
     font-size: 16px;
     text-align: center;
     text-decoration: none;
-    border: 1px solid #27ae60;
+    border: 1px solid #b13a1c;
     border-radius: 5px;
-    color: #27ae60;
-    background-color: white;
+    color: #b13a1c;
+    background-color: rgb(2, 2, 2);
     transition: background-color 0.3s, color 0.3s;
 }
 
 .sort-button.active {
-    background-color: #27ae60;
+    background-color: #b13a1c;
     /* Color de fondo cuando el botón está activo */
-    color: white;
+    color: rgb(0, 0, 0);
     /* Color del texto cuando el botón está activo */
 }
 
 .sort-button:hover {
-    background-color: #27ae60;
-    color: white;
+    background-color: #b13a1c;
+    color: rgb(0, 0, 0);
 }

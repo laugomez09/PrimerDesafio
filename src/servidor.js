@@ -51,14 +51,14 @@ app.use("/api", viewRouter);
 
 
 io.on("connection", (socket) => {
-    console.log("Nuevo usuario conectado");
+    console.log("Nuevo usuario se  ha conectado con exito!");
 
     socket.on("message", async (data) => {
         try {
             const newMessage = await MessagesDao.addMessage(data.user, data.message);
             io.emit("messages", await MessagesDao.getAllMessages());
         } catch (error) {
-            console.error(`Hubo un error al procesar el mensaje del formulario en tiempo real: ${error.message}`);
+            console.error(`Se produjo un fallo al gestionar la información del formulario en tiempo real: ${error.message}`);
         }
     });
 
