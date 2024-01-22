@@ -24,6 +24,13 @@ mongoose.connect('mongodb://127.0.0.1:27017/ecommers')
 
 const io = new Server(httpServer)
 
+app.get("/", (req, res) => {
+    res.render("index", {
+        title: "Bienvenida",
+        fileCss: "moduleBienvenida.css",
+    })
+})
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
